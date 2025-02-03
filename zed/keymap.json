@@ -1,0 +1,25 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: Open Default Keymap`
+// from the command palette.
+[
+  {
+    "bindings": {
+      "cmd-t": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-e ": ["workspace::ActivatePane", 0]
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      //"cmd + t": "workspace::OpenTerminal"
+    }
+  }
+]

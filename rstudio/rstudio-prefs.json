@@ -1,0 +1,16 @@
+{
+    "jobs_tab_visibility": "shown",
+    "default_project_location": "/Users/mattsmith/Dropbox (University of Michigan)/from_box/My_Stuff/R_codes",
+    "new_proj_git_init": true,
+    "new_proj_use_renv": true,
+    "source_with_echo": true,
+    "initial_working_directory": "~",
+    "global_theme": "alternate",
+    "font_size_points": 11,
+    "editor_theme": "Solarized Dark",
+    "posix_terminal_shell": "bash",
+    "highlight_selected_line": true,
+    "highlight_r_function_calls": true,
+    "rainbow_parentheses": true,
+    "indent_guides": "gray"
+}
