@@ -9,9 +9,3 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.relativenumber = true
 
 vim.lsp.inlay_hint.enable(ture)
-
-vim.g.rustaceanvim = {
-	server = {
-		settings = { ['rust-analyzer'] = {} }
-  }
-}
