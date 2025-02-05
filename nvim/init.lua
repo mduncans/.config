@@ -1,10 +1,3 @@
-vim.cmd("set tabstop=3")
-vim.cmd("set shiftwidth=3")
-vim.cmd("set softtabstop=3")
-vim.g.mapleader = " "
-vim.opt.number = true
-vim.opt.clipboard = "unnamedplus"
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -18,8 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {}
+-- local opts = {}
 
+require("vim-options")
 require("lazy").setup("plugins", opts)
 
 local cmp = require('cmp')
@@ -35,11 +29,3 @@ cmp.setup({
     { name = 'luasnip' } -- Optional: for snippet expansion
   }
 })
-
-vim.lsp.inlay_hint.enable(ture)
-
-vim.g.rustaceanvim = {
-	server = {
-		settings = { ['rust-analyzer'] = {} }
-  }
-}

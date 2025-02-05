@@ -1,0 +1,14 @@
+vim.cmd("set tabstop=3")
+vim.cmd("set shiftwidth=3")
+vim.cmd("set softtabstop=3")
+vim.g.mapleader = " "
+vim.opt.number = true
+vim.opt.clipboard = "unnamedplus"
+
+vim.lsp.inlay_hint.enable(ture)
+
+vim.g.rustaceanvim = {
+	server = {
+		settings = { ['rust-analyzer'] = {} }
+  }
+}
