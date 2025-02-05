@@ -8,4 +8,4 @@ vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.relativenumber = true
 
-vim.lsp.inlay_hint.enable(ture)
+vim.lsp.inlay_hint.enable(true)

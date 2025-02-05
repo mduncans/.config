@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server" }
+				ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server", "mdx_analyzer" }
 			})
 		end
 	},
@@ -17,12 +17,19 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local lspconfig = require("lspconfig")
+
 			lspconfig.lua_ls.setup({})
-			lspconfig.rust_analyzer.setup {
+			lspconfig.rust_analyzer.setup({
 				settings = {
 					['rust_analyzer'] = {}
 				},
-			}
+			})
+			lspconfig.mdx_analyzer.setup({})
+			lspconfig.r_language_server.setup({})
+
+			vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+			vim.keymap.set({ 'n' }, '<leader>ca', vim.lsp.buf.code_action, {})
 		end
 	}
 }
