@@ -21,7 +21,7 @@ return {
 			lspconfig.lua_ls.setup({})
 			lspconfig.rust_analyzer.setup({
 				settings = {
-					['rust_analyzer'] = {}
+					['rust_analyzer'] = {autostart = true}
 				},
 			})
 			lspconfig.mdx_analyzer.setup({})
