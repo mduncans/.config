@@ -3,15 +3,20 @@ return {
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
-		end
+		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "rust_analyzer", "r_language_server", "mdx_analyzer" }
+				ensure_installed = {
+					"lua_ls",
+					"rust_analyzer",
+					"r_language_server",
+					"mdx_analyzer",
+				},
 			})
-		end
+		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -21,15 +26,29 @@ return {
 			lspconfig.lua_ls.setup({})
 			lspconfig.rust_analyzer.setup({
 				settings = {
-					['rust_analyzer'] = {autostart = true}
+					["rust-analyzer"] = {
+						autostart = true,
+						checkOnSave = {
+							enable = false,
+						},
+						diagnostics = {
+							enable = false,
+						},
+					},
 				},
 			})
 			lspconfig.mdx_analyzer.setup({})
 			lspconfig.r_language_server.setup({})
-
-			vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
-			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-			vim.keymap.set({ 'n' }, '<leader>ca', vim.lsp.buf.code_action, {})
-		end
-	}
+			lspconfig.bacon_ls.setup({
+				init_options = {
+					updateOnSave = true,
+					updateOnSaveWaitMillis = 1000,
+					updateOnChange = false,
+				},
+			})
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+			vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {})
+		end,
+	},
 }
