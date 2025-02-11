@@ -4,6 +4,7 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip",
+		build = "make install_jsregexp",
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
@@ -18,7 +19,7 @@ return {
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
 					end,
 				},
 				window = {
@@ -33,7 +34,7 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 				}),
 				sources = cmp.config.sources({
-					--{ name = "nvim_lsp" },
+					{ name = "nvim_lsp" },
 					{ name = "luasnip" }, -- For luasnip users.
 				}, {
 					{ name = "buffer" },

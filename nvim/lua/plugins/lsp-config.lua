@@ -11,7 +11,6 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
-					"rust_analyzer",
 					"r_language_server",
 					"mdx_analyzer",
 				},
@@ -21,18 +20,17 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilites
-			lspconfig.lua_ls.setup({})
-			lspconfig.rust_analyzer.setup({
-				settings = {
-					["rust-analyzer"] = { autostart = true },
-				},
+
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities
+			})
+
+			lspconfig.mdx_analyzer.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.mdx_analyzer.setup({
-				capabilites = capabilities,
-			})
+
 			lspconfig.r_language_server.setup({
 				capabilities = capabilities,
 			})
