@@ -23,8 +23,26 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 
+			lspconfig.rust_analyzer.setup({
+				settings = {
+					["rust-analyzer"] = {
+						procMacro = {
+							ignored = {
+								leptos_macro = {
+									"server",
+								},
+							},
+						},
+						rustfmt = {
+							overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
+						},
+					},
+				},
+				capabilities = capabilities,
+			})
+
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 
 			lspconfig.mdx_analyzer.setup({
@@ -36,7 +54,7 @@ return {
 			})
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+			vim.keymap.set("n", "<leader>bd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {})
 		end,
 	},
