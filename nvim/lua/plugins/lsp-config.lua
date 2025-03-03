@@ -44,6 +44,20 @@ return {
 				capabilities = capabilities,
 			})
 
+			lspconfig.pyright.setup({
+				settings = {
+					python = {
+						analysis = {
+							typeCheckingMode = "strict", -- Options: "off", "basic", "strict"
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+							diagnosticMode = "workspace",
+						}
+					}
+				},
+				capabilities = capabilities,
+			})
+
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
