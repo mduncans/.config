@@ -18,3 +18,9 @@ vim.keymap.set("n", "<leader>sf", function()
 	}, "l", true, true)
 	vim.cmd("normal! kkk0w")
 end, { desc = "Insert Rust function template" })
+
+vim.filetype.add({
+  extension = {
+    mdx = "markdown",
+  }
+})
