@@ -48,7 +48,7 @@ return {
 				settings = {
 					python = {
 						analysis = {
-							typeCheckingMode = "strict", -- Options: "off", "basic", "strict"
+							typeCheckingMode = "basic", -- Options: "off", "basic", "strict"
 							autoSearchPaths = true,
 							useLibraryCodeForTypes = true,
 							diagnosticMode = "workspace",
