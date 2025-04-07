@@ -14,13 +14,13 @@ vim.keymap.set("n", "<leader>sf", function()
 	vim.api.nvim_put({
 		"fn function() -> anyhow::Result<()> {",
 		"	todo!()",
-		"}"
+		"}",
 	}, "l", true, true)
 	vim.cmd("normal! kkk0w")
 end, { desc = "Insert Rust function template" })
 
 vim.filetype.add({
-  extension = {
-    mdx = "markdown",
-  }
+	extension = {
+		mdx = "markdown",
+	},
 })

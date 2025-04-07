@@ -20,7 +20,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
-			format = { timeout_ms = 10000 }
+			format = { timeout_ms = 10000 },
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -52,8 +52,8 @@ return {
 							autoSearchPaths = true,
 							useLibraryCodeForTypes = true,
 							diagnosticMode = "workspace",
-						}
-					}
+						},
+					},
 				},
 				capabilities = capabilities,
 			})
@@ -67,6 +67,7 @@ return {
 			})
 
 			lspconfig.r_language_server.setup({
+				filetypes = { "r", "R", "rmd", "Rmd", "quarto", "qmd" },
 				capabilities = capabilities,
 			})
 
