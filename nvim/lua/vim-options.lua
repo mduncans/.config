@@ -24,3 +24,13 @@ vim.filetype.add({
 		mdx = "markdown",
 	},
 })
+
+vim.keymap.set({ 'i', 'n', 'v' }, '<C-C>', '<esc>', { desc = 'Make Ctrl+C behave exactly like escape.' })
+
+vim.diagnostic.config({
+  virtual_text = true,  -- Explicitly enable virtual text
+  severity_sort = true,
+  float = {
+    border = "rounded",
+  },
+})
