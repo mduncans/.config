@@ -26,6 +26,15 @@ return {
 				},
 			})
 			vim.keymap.set("n", "<leader>qp", require("quarto").quartoPreview, { silent = true, noremap = true })
+
+			vim.keymap.set("n", "<C-CR>", function()
+				require("quarto.runner").run_line()
+			end, { silent = true, noremap = true })
+
+			vim.keymap.set("n", "<S-C-CR>", function()
+				require("quarto.runner").run_cell()
+			end, { silent = true, noremap = true })
+
 		end,
 	},
 

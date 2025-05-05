@@ -36,9 +36,7 @@ return {
 								},
 							},
 						},
-						rustfmt = {
-							overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
-						},
+						rustfmt = {},
 					},
 				},
 				capabilities = capabilities,
@@ -73,6 +71,11 @@ return {
 
 			lspconfig.lemminx.setup({
 				filetypes = { "xml" },
+				capabilities = capabilities
+			})
+
+			lspconfig.jsonls.setup({
+				filetypes = { "json" },
 				capabilities = capabilities
 			})
 

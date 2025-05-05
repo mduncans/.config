@@ -19,6 +19,19 @@ vim.keymap.set("n", "<leader>sf", function()
 	vim.cmd("normal! kkk0w")
 end, { desc = "Insert Rust function template" })
 
+vim.keymap.set("n", "<leader>rr", function()
+	vim.api.nvim_put({
+		"#' Title",
+		"#'",
+		"#' @param ",
+		"#'",
+		"#' @return",
+		"#' @export",
+		"#'",
+		"#' @examples",
+	}, "l", true, true)
+end, { desc = "Insert roxygen template" })
+
 vim.filetype.add({
 	extension = {
 		mdx = "markdown",
@@ -28,9 +41,9 @@ vim.filetype.add({
 vim.keymap.set({ 'i', 'n', 'v' }, '<C-C>', '<esc>', { desc = 'Make Ctrl+C behave exactly like escape.' })
 
 vim.diagnostic.config({
-  virtual_text = true,  -- Explicitly enable virtual text
-  severity_sort = true,
-  float = {
-    border = "rounded",
-  },
+	virtual_text = true, -- Explicitly enable virtual text
+	severity_sort = true,
+	float = {
+		border = "rounded",
+	},
 })
