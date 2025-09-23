@@ -1,8 +1,6 @@
 {
     "jobs_tab_visibility": "shown",
-    "default_project_location": "/Users/mattsmith/Dropbox (University of Michigan)/from_box/My_Stuff/R_codes",
-    "new_proj_git_init": true,
-    "new_proj_use_renv": true,
+    "default_project_location": "~/Documents",
     "source_with_echo": true,
     "initial_working_directory": "~",
     "global_theme": "alternate",
@@ -12,5 +10,9 @@
     "highlight_selected_line": true,
     "highlight_r_function_calls": true,
     "rainbow_parentheses": true,
-    "indent_guides": "gray"
+    "indent_guides": "gray",
+    "editor_keybindings": "vim",
+    "show_hidden_files": true,
+    "soft_wrap_r_files": true,
+    "relative_line_numbers": true
 }

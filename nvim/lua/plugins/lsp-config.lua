@@ -11,8 +11,11 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
-					"r_language_server",
+					"rust_analyzer",
 					"mdx_analyzer",
+					"pyright",
+					"lemminx",
+					"jsonls",
 				},
 			})
 		end,
@@ -24,11 +27,13 @@ return {
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
 
-			lspconfig.rust_analyzer.setup({
+			vim.lsp.config('rust_analyzer', {
 				settings = {
 					["rust-analyzer"] = {
+						cargo = {
+							features = "all"
+						},
 						procMacro = {
 							ignored = {
 								leptos_macro = {
@@ -42,11 +47,11 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.pyright.setup({
+			vim.lsp.config('pyright', {
 				settings = {
 					python = {
 						analysis = {
-							typeCheckingMode = "basic", -- Options: "off", "basic", "strict"
+							typeCheckingMode = "basic",
 							autoSearchPaths = true,
 							useLibraryCodeForTypes = true,
 							diagnosticMode = "workspace",
@@ -56,28 +61,37 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.lua_ls.setup({
+			vim.lsp.config('lua_ls', {
 				capabilities = capabilities,
 			})
 
-			lspconfig.mdx_analyzer.setup({
+			vim.lsp.config('mdx_analyzer', {
 				capabilities = capabilities,
 			})
 
-			lspconfig.r_language_server.setup({
+			vim.lsp.config('air', {
+				cmd = { "air" },
 				filetypes = { "r", "R", "rmd", "Rmd", "quarto", "qmd" },
 				capabilities = capabilities,
 			})
 
-			lspconfig.lemminx.setup({
+			vim.lsp.config('lemminx', {
 				filetypes = { "xml" },
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 
-			lspconfig.jsonls.setup({
+			vim.lsp.config('jsonls', {
 				filetypes = { "json" },
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
+
+			vim.lsp.enable('rust_analyzer')
+			vim.lsp.enable('pyright')
+			vim.lsp.enable('lua_ls')
+			vim.lsp.enable('mdx_analyzer')
+			vim.lsp.enable('air')
+			vim.lsp.enable('lemminx')
+			vim.lsp.enable('jsonls')
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>bd", vim.lsp.buf.definition, {})
