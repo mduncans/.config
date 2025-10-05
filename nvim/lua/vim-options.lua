@@ -19,18 +19,147 @@ vim.keymap.set("n", "<leader>sf", function()
 	vim.cmd("normal! kkk0w")
 end, { desc = "Insert Rust function template" })
 
+-- Function to extract parameters from function signature
+local function extract_params_from_function()
+	local line_num = vim.api.nvim_win_get_cursor(0)[1]
+	local total_lines = vim.api.nvim_buf_line_count(0)
+
+	-- Search backwards and forwards for function signature
+	local function_start_line = nil
+	local search_range = 10
+
+	-- Search backwards first (for when cursor is after function)
+	for i = 0, search_range do
+		if line_num - i > 0 then
+			local line = vim.api.nvim_buf_get_lines(0, line_num - i - 1, line_num - i, false)[1] or ""
+			if line:match("^%s*pub%s+fn%s+") or line:match("^%s*fn%s+") or line:match("^%s*function") or line:match("^[%w_]+%s*<%-") then
+				function_start_line = line_num - i
+				break
+			end
+		end
+	end
+
+	-- If not found backwards, search forwards
+	if not function_start_line then
+		for i = 0, search_range do
+			if line_num + i <= total_lines then
+				local line = vim.api.nvim_buf_get_lines(0, line_num + i - 1, line_num + i, false)[1] or ""
+				if line:match("^%s*pub%s+fn%s+") or line:match("^%s*fn%s+") or line:match("^%s*function") or line:match("^[%w_]+%s*<%-") then
+					function_start_line = line_num + i
+					break
+				end
+			end
+		end
+	end
+
+	if not function_start_line then
+		return {}
+	end
+
+	-- Collect the full function signature (may span multiple lines)
+	local function_lines = {}
+	local paren_count = 0
+	local found_opening_paren = false
+
+	for i = function_start_line, math.min(function_start_line + 10, total_lines) do
+		local line = vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1] or ""
+		table.insert(function_lines, line)
+
+		-- Count parentheses to find complete signature
+		for char in line:gmatch(".") do
+			if char == "(" then
+				paren_count = paren_count + 1
+				found_opening_paren = true
+			elseif char == ")" then
+				paren_count = paren_count - 1
+			end
+		end
+
+		-- Stop when we've found the complete signature
+		if found_opening_paren and paren_count == 0 then
+			break
+		end
+	end
+
+	local full_signature = table.concat(function_lines, " ")
+	local params = {}
+
+	-- Extract parameters from the complete signature
+	local param_section = full_signature:match("%(([^%)]*)")
+	if param_section then
+		-- Clean up whitespace and newlines
+		param_section = param_section:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
+
+		-- Rust function pattern: param_name: Type
+		if full_signature:match("fn%s+") then
+			for param in param_section:gmatch("([%w_]+)%s*:%s*[^,]+") do
+				if param ~= "self" then
+					table.insert(params, param)
+				end
+			end
+		end
+
+		-- R function pattern: param_name = default or just param_name
+		if full_signature:match("<%-") or full_signature:match("function") then
+			for param in param_section:gmatch("([%w_%.]+)%s*[=,]?") do
+				param = param:gsub("%s*$", "")
+				if param ~= "" then
+					table.insert(params, param)
+				end
+			end
+		end
+	end
+
+	return params
+end
+
 vim.keymap.set("n", "<leader>rr", function()
-	vim.api.nvim_put({
+	local params = extract_params_from_function()
+	local template = {
 		"#' Title",
 		"#'",
-		"#' @param ",
+	}
+
+	-- Add @param lines for each parameter
+	for _, param in ipairs(params) do
+		table.insert(template, "#' @param " .. param .. " ")
+	end
+
+	-- Add remaining template
+	vim.list_extend(template, {
 		"#'",
 		"#' @return",
 		"#' @export",
 		"#'",
 		"#' @examples",
-	}, "l", true, true)
-end, { desc = "Insert roxygen template" })
+	})
+
+	vim.api.nvim_put(template, "l", true, true)
+end, { desc = "Insert roxygen template with auto params" })
+
+vim.keymap.set("n", "<leader>rx", function()
+	local params = extract_params_from_function()
+	local template = {
+		"/// Title",
+		"///",
+	}
+
+	-- Add @param lines for each parameter
+	for _, param in ipairs(params) do
+		table.insert(template, "/// @param " .. param .. " ")
+	end
+
+	-- Add remaining template
+	vim.list_extend(template, {
+		"///",
+		"/// @return",
+		"/// @export",
+		"///",
+		"/// @examples",
+	})
+
+	vim.api.nvim_put(template, "l", true, true)
+end, { desc = "Insert roxygen template with auto params" })
 
 vim.filetype.add({
 	extension = {
