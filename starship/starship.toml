@@ -1,3 +1,4 @@
+
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
@@ -10,20 +11,11 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:yellow bg:green)\
-$c\
 $rust\
 $golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
-$haskell\
 $python\
-[](fg:green bg:sapphire)\
-$conda\
-[](fg:sapphire bg:lavender)\
-$time\
-[ ](fg:lavender)\
+${custom.r}\
+[ ](fg:green)\
 $cmd_duration\
 $line_break
 $character"""
@@ -89,10 +81,14 @@ symbol = ""
 style = "bg:green"
 format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
 
-[c]
-symbol = " "
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+[custom.r]
+description = "R version"
+command = "Rscript --vanilla -e 'cat(as.character(getRversion()))'"
+detect_extensions = ["R", "Rmd", "qmd"]
+detect_files = ["DESCRIPTION", ".Rprofile"]
+symbol = "󰟔"
+style = "fg:crust bg:green"
+format = '[[ $symbol( v$output) ](fg:crust bg:green)]($style)'
 
 [rust]
 symbol = ""
