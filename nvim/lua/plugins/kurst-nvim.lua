@@ -1,5 +1,5 @@
 -- With lazy.nvim
-{
+return {
   "alexpasmantier/krust.nvim",
   ft = "rust",
   opts = {
