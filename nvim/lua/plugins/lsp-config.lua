@@ -70,7 +70,7 @@ return {
 			})
 
 			vim.lsp.config('air', {
-				cmd = { "air" },
+				cmd = { "air" , "language-server" },
 				filetypes = { "r", "R", "rmd", "Rmd", "quarto", "qmd" },
 				capabilities = capabilities,
 			})

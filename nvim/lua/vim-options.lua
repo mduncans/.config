@@ -3,6 +3,7 @@ vim.cmd("set shiftwidth=2")
 vim.cmd("set softtabstop=2")
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 vim.opt.number = true
 vim.opt.clipboard = "unnamedplus"
@@ -10,14 +11,12 @@ vim.opt.relativenumber = true
 
 vim.lsp.inlay_hint.enable(true)
 
-vim.keymap.set("n", "<leader>sf", function()
-	vim.api.nvim_put({
-		"fn function() -> anyhow::Result<()> {",
-		"	todo!()",
-		"}",
-	}, "l", true, true)
-	vim.cmd("normal! kkk0w")
-end, { desc = "Insert Rust function template" })
+vim.g.slime_target = "tmux"
+vim.g.slime_dont_ask_default = 0
+vim.g.slime_default_config = {
+	socket_name = "default",
+	target_pane = "{last}",
+}
 
 -- Function to extract parameters from function signature
 local function extract_params_from_function()
