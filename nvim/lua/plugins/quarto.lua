@@ -30,7 +30,8 @@ return {
 
 			vim.keymap.set("n", "<leader>rc", runner.run_cell, { desc = "Run cell", silent = true })
 			vim.keymap.set("n", "<leader>rl", runner.run_line, { desc = "Run line", silent = true })
-			vim.keymap.set("v", "<leader>r", runner.run_range, { desc = "Run visual range", silent = true })
+			vim.keymap.set("v", "<leader>r", "<Plug>SlimeRegionSend", { desc = "Send selection to REPL" })
+
 		end,
 	},
 
