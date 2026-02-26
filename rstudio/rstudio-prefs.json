@@ -11,7 +11,6 @@
     "rainbow_parentheses": true,
     "indent_guides": "gray",
     "editor_keybindings": "vim",
-    "show_hidden_files": true,
     "soft_wrap_r_files": true,
     "relative_line_numbers": true,
     "editor_theme": "Solarized Dark"

@@ -10,12 +10,14 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
+					"air",
 					"lua_ls",
 					"rust_analyzer",
 					"mdx_analyzer",
 					"pyright",
 					"lemminx",
 					"jsonls",
+					"taplo",
 				},
 			})
 		end,
@@ -85,6 +87,11 @@ return {
 				capabilities = capabilities,
 			})
 
+			vim.lsp.config('taplo', {
+				filetypes = { "toml" },
+				capabilities = capabilities,
+			})
+
 			vim.lsp.enable('rust_analyzer')
 			vim.lsp.enable('pyright')
 			vim.lsp.enable('lua_ls')
@@ -92,6 +99,7 @@ return {
 			vim.lsp.enable('air')
 			vim.lsp.enable('lemminx')
 			vim.lsp.enable('jsonls')
+			vim.lsp.enable('taplo')
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>bd", vim.lsp.buf.definition, {})

@@ -160,6 +160,36 @@ vim.keymap.set("n", "<leader>rx", function()
 	vim.api.nvim_put(template, "l", true, true)
 end, { desc = "Insert roxygen template with auto params" })
 
+local function insert_empty_r_block()
+	local row = vim.api.nvim_win_get_cursor(0)[1] - 1
+	vim.api.nvim_buf_set_lines(0, row, row, true, { "```{r}", "", "```" })
+	vim.api.nvim_win_set_cursor(0, { row + 2, 0 })
+	vim.cmd("startinsert")
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "quarto", "r", "rmd" },
+	callback = function()
+		vim.keymap.set("n", "<leader>I", insert_empty_r_block, {
+			buffer = true,
+			desc = "Insert empty R code block",
+		})
+		vim.keymap.set("n", "<leader>L", "a <Bar>><CR><Tab>", {
+			buffer = true,
+			desc = "Insert pipe and newline",
+		})
+		-- Pipe operator like RStudio's Cmd+Shift+M
+		vim.keymap.set("n", "<M-m>", "a <Bar>><CR><Tab>", {
+			buffer = true,
+			desc = "Insert pipe and newline",
+		})
+		vim.keymap.set("i", "<M-m>", " <Bar>><CR><Tab>", {
+			buffer = true,
+			desc = "Insert pipe and newline",
+		})
+	end,
+})
+
 vim.filetype.add({
 	extension = {
 		mdx = "markdown",
