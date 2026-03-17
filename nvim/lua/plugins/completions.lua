@@ -3,6 +3,9 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	{
+		"hrsh7th/cmp-path",
+	},
+	{
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
 		dependencies = {
@@ -19,14 +22,30 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local types = require("cmp.types")
 
 			require("luasnip.loaders.from_vscode").lazy_load()
+
+			local has_words_before = function()
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				if col == 0 then
+					return false
+				end
+				local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+				return text:sub(col, col):match("%s") == nil
+			end
 
 			cmp.setup({
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
 					end,
+				},
+				completion = {
+					autocomplete = {
+						types.cmp.TriggerEvent.TextChanged,
+					},
+					keyword_length = 1,
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -43,10 +62,12 @@ return {
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
+						elseif not has_words_before() then
+							fallback()
 						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
 						else
-							fallback()
+							cmp.complete()
 						end
 					end, { "i", "s" }),
 
@@ -62,8 +83,9 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
 					{ name = "buffer" },
+					{ name = "path" },
+					{ name = "luasnip" },
 				}),
 			})
 		end,

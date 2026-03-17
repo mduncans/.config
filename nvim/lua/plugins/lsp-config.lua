@@ -73,7 +73,12 @@ return {
 
 			vim.lsp.config('air', {
 				cmd = { "air" , "language-server" },
-				filetypes = { "r", "R", "rmd", "Rmd", "quarto", "qmd" },
+				filetypes = { "r", "rmd", "quarto" },
+				capabilities = capabilities,
+			})
+
+			vim.lsp.config('r_language_server', {
+				filetypes = { "r", "rmd", "quarto" },
 				capabilities = capabilities,
 			})
 
@@ -97,6 +102,7 @@ return {
 			vim.lsp.enable('lua_ls')
 			vim.lsp.enable('mdx_analyzer')
 			vim.lsp.enable('air')
+			vim.lsp.enable('r_language_server')
 			vim.lsp.enable('lemminx')
 			vim.lsp.enable('jsonls')
 			vim.lsp.enable('taplo')
