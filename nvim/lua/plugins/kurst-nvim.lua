@@ -1,6 +1,6 @@
 return {
 	"alexpasmantier/krust.nvim",
-	ft = "rust",
+	event = "VeryLazy",
 	opts = {
 		keymap = "<leader>k",
 		float_win = {
