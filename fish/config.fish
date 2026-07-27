@@ -4,3 +4,7 @@
 eval /Users/mattsmith/opt/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 
+
+if status is-interactive
+    atuin init fish | source
+end

@@ -1,7 +1,6 @@
 {
     "jobs_tab_visibility": "shown",
-    "default_project_location": "~/Documents",
-    "source_with_echo": true,
+    "default_project_location": "~",
     "initial_working_directory": "~",
     "global_theme": "alternate",
     "font_size_points": 11,
@@ -13,5 +12,9 @@
     "editor_keybindings": "vim",
     "soft_wrap_r_files": true,
     "relative_line_numbers": true,
-    "editor_theme": "Solarized Dark"
+    "editor_theme": "Solarized Dark",
+    "show_hidden_files": true,
+    "source_with_echo": true,
+    "new_proj_git_init": true,
+    "shiny_viewer_type": "pane"
 }

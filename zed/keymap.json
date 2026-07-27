@@ -17,6 +17,40 @@
     }
   },
   {
+    "context": "Dock || Pane || Editor && !VimWaiting && !menu",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-f %": "pane::SplitRight",
+      "ctrl-f \"": "pane::SplitDown",
+      "ctrl-f x": "pane::CloseAllItems"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space g f": "editor::Format",
+      "space b d": "editor::GoToDefinition",
+      "space c a": "editor::ToggleCodeActions",
+      "space f g": "workspace::NewSearch",
+      "space l g": ["task::Spawn", { "task_name": "lazygit" }],
+      "ctrl-p": "file_finder::Toggle",
+      "ctrl-n": "project_panel::ToggleFocus"
+    }
+  },
+  {
     "context": "Editor",
     "bindings": {
       //"cmd + t": "workspace::OpenTerminal"
