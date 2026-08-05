@@ -14,6 +14,7 @@ return {
 					"lua_ls",
 					"rust_analyzer",
 					"mdx_analyzer",
+					"marksman",
 					"pyright",
 					"lemminx",
 					"jsonls",
@@ -71,6 +72,10 @@ return {
 				capabilities = capabilities,
 			})
 
+			vim.lsp.config('marksman', {
+				capabilities = capabilities,
+			})
+
 			vim.lsp.config('air', {
 				cmd = { "air" , "language-server" },
 				filetypes = { "r", "rmd", "quarto" },
@@ -101,6 +106,7 @@ return {
 			vim.lsp.enable('pyright')
 			vim.lsp.enable('lua_ls')
 			vim.lsp.enable('mdx_analyzer')
+			vim.lsp.enable('marksman')
 			vim.lsp.enable('air')
 			vim.lsp.enable('r_language_server')
 			vim.lsp.enable('lemminx')

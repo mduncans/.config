@@ -16,6 +16,9 @@ return {
 	-- Optional but recommended if you want { name = "buffer" } to work:
 	{
 		"hrsh7th/cmp-buffer",
+		-- pin to the "don't use deprecated functions" commit; upstream reverted it
+		-- for old-nvim compat, which spams vim.validate deprecation errors on 0.12
+		commit = "51f42e6",
 	},
 	{
 		"hrsh7th/nvim-cmp",

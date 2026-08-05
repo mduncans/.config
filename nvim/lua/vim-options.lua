@@ -205,3 +205,16 @@ vim.diagnostic.config({
 		border = "rounded",
 	},
 })
+
+-- open image files in the system viewer (Preview) instead of rendering in the terminal
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" },
+	callback = function(ev)
+		vim.ui.open(ev.match)
+		vim.schedule(function()
+			if vim.api.nvim_buf_is_valid(ev.buf) then
+				vim.api.nvim_buf_delete(ev.buf, { force = true })
+			end
+		end)
+	end,
+})

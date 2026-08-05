@@ -36,6 +36,7 @@ return {
 			},
 		},
 		explorer = { enabled = true },
+		image = { enabled = false },
 		indent = { enabled = true },
 		input = { enabled = true },
 		notifier = {
