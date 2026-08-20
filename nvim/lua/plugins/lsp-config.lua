@@ -19,6 +19,8 @@ return {
 					"lemminx",
 					"jsonls",
 					"taplo",
+					"vtsls",
+					"eslint",
 				},
 			})
 		end,
@@ -102,6 +104,31 @@ return {
 				capabilities = capabilities,
 			})
 
+			local ts_inlay_hints = {
+				enumMemberValues = { enabled = true },
+				functionLikeReturnTypes = { enabled = true },
+				parameterNames = { enabled = "literals" },
+				parameterTypes = { enabled = true },
+				propertyDeclarationTypes = { enabled = true },
+				variableTypes = { enabled = true },
+			}
+
+			vim.lsp.config('vtsls', {
+				settings = {
+					typescript = { inlayHints = ts_inlay_hints },
+					javascript = { inlayHints = ts_inlay_hints },
+					vtsls = {
+						-- surface the real type instead of the alias name
+						experimental = { maxInlayHintLength = 40 },
+					},
+				},
+				capabilities = capabilities,
+			})
+
+			vim.lsp.config('eslint', {
+				capabilities = capabilities,
+			})
+
 			vim.lsp.enable('rust_analyzer')
 			vim.lsp.enable('pyright')
 			vim.lsp.enable('lua_ls')
@@ -112,10 +139,15 @@ return {
 			vim.lsp.enable('lemminx')
 			vim.lsp.enable('jsonls')
 			vim.lsp.enable('taplo')
+			vim.lsp.enable('vtsls')
+			vim.lsp.enable('eslint')
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>bd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>ui", function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }))
+			end, { desc = "Toggle Inlay Hints" })
 		end,
 	},
 }

@@ -1,0 +1,1 @@
+{"binaries":["arf"],"binary_aliases":{},"cdylibs":[],"cstaticlibs":[],"install_layout":"cargo-home","install_prefix":"/Users/mattsmith/.cargo","modify_path":true,"provider":{"source":"cargo-dist","version":"0.30.3"},"source":{"app_name":"arf-console","name":"arf","owner":"eitsupi","release_type":"github"},"version":"0.3.3"}
