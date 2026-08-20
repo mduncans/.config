@@ -21,6 +21,8 @@ return {
 					"taplo",
 					"vtsls",
 					"eslint",
+					"html",
+					"cssls",
 				},
 			})
 		end,
@@ -129,6 +131,16 @@ return {
 				capabilities = capabilities,
 			})
 
+			vim.lsp.config('html', {
+				filetypes = { "html" },
+				capabilities = capabilities,
+			})
+
+			vim.lsp.config('cssls', {
+				filetypes = { "css", "scss", "less" },
+				capabilities = capabilities,
+			})
+
 			vim.lsp.enable('rust_analyzer')
 			vim.lsp.enable('pyright')
 			vim.lsp.enable('lua_ls')
@@ -141,6 +153,8 @@ return {
 			vim.lsp.enable('taplo')
 			vim.lsp.enable('vtsls')
 			vim.lsp.enable('eslint')
+			vim.lsp.enable('html')
+			vim.lsp.enable('cssls')
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>bd", vim.lsp.buf.definition, {})

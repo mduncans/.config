@@ -48,6 +48,8 @@ return {
 						"typescriptreact",
 						"javascript",
 						"javascriptreact",
+						"html",
+						"css",
 					},
 				}),
 				lintr,
